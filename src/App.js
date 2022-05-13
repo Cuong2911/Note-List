@@ -18,6 +18,8 @@ const App = () => {
 
   const [darkMode, setDarkMode] = useState(true);
 
+  const colorFooter = darkMode ? '#fff' : '#000';
+
   useEffect(() => {
     const savedNotes = JSON.parse(
       localStorage.getItem('react-note-app-data')
@@ -57,14 +59,22 @@ const App = () => {
     <div className={`${darkMode && 'dark-mode'}`}>
       <div className="container">
         <Header handleToggleDarkMode={setDarkMode} darkMode={darkMode}/>
-        <Search handleSearch={setSearchText}/>
-        <NoteList
-          notes={notes.filter((note) =>
-              note.text.toLowerCase().includes(searchText)
-          )} 
-          handleAddNote={addNote}
-          handleDeleteNote={deleteNote}
-        />
+        <section>
+          <Search handleSearch={setSearchText}/>
+          <NoteList
+            notes={notes.filter((note) =>
+                note.text.toLowerCase().includes(searchText)
+            )} 
+            handleAddNote={addNote}
+            handleDeleteNote={deleteNote}
+          />
+        </section>
+        <footer 
+          className="footer-app" 
+          style={{
+            color: `${colorFooter}`
+          }}
+        >Write by Hoangcuong!</footer>
       </div>
     </div>
   )
